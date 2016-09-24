@@ -23,8 +23,10 @@ def finish_markov(chat, cur):
 @bot.command(r'/markovski(?:@markovskibot)?$')
 async def on_markov(chat, match):
     cur = conn.cursor()
-    cur.execute('''SELECT a, b, c, count FROM markov WHERE a=\'\' AND chat=%s
-                       ORDER BY RANDOM()*count LIMIT 1''', (chat.id,))
+    cur.execute('''SELECT a, b, c, count FROM markov
+                       WHERE a=\'\' AND chat=%s
+                       ORDER BY RANDOM()*count
+                       LIMIT 1''', (chat.id,))
     s = finish_markov(chat, cur)
     await chat.send_text(s)
 
